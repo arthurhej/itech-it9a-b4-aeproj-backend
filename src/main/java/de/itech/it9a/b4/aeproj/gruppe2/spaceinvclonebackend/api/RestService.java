@@ -14,26 +14,30 @@ import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.model.Score;
 
 @RestController
 public class RestService {
-	
-	private ScoreController scoreController;
-	
-	public RestService() {
-		scoreController = new ScoreController();
-	}
-	
-	@GetMapping("/scores")
-	public List<Score> newScore(){
-		return scoreController.findAll();
-	}
-	
-	@PutMapping("/scores")
-	public void insertScore(@RequestBody Score score) {
-		scoreController.insertScore(score);
-	}
-	
-	@DeleteMapping("/scores/{id}")
-	public void removeScore(@PathVariable Long id) {
-		Score score = scoreController.findById(id);
-		scoreController.removeScore(score);
-	}
+
+    private ScoreController scoreController;
+
+    public RestService() {
+
+        scoreController = new ScoreController();
+    }
+
+    @GetMapping("/scores")
+    public List<Score> newScore() {
+
+        return scoreController.findAll();
+    }
+
+    @PutMapping("/scores")
+    public void insertScore(@RequestBody Score score) {
+
+        scoreController.insertScore(score);
+    }
+
+    @DeleteMapping("/scores/{id}")
+    public void removeScore(@PathVariable String id) {
+
+        Score score = scoreController.findById(id);
+        scoreController.removeScore(score);
+    }
 }

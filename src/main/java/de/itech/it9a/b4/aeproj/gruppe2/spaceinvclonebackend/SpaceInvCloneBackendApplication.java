@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpaceInvCloneBackendApplication {
 
-	
-	public static void main(String[] args) {
-		SpringApplication.run(SpaceInvCloneBackendApplication.class, args);
-		
-	}
+    public static void main(String[] args) {
+
+        SpringApplication.run(SpaceInvCloneBackendApplication.class, args);
+    }
 
 }
