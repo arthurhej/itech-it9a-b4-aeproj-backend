@@ -13,15 +13,23 @@ public class ScoreController {
 	
 	private final MongoOperations mongoOps = appConf.mongoTemplate();
 	
-	private void insertScore(Score score) {
+	public void insertScore(Score score) {
 		mongoOps.insert(score);
 	}
 	
-	private List<Score> findAll() {
+	public Score findById(long id){
+		return mongoOps.findById(id, Score.class);
+	}
+	
+	public List<Score> findAll() {
 		return mongoOps.findAll(Score.class);
 	}
 	
-	private void removeScore(Score score) {
+//	public List<Score> findTopTen(List<Score> allScores) {
+//		allScores.sort(Score.score);
+//	}
+	
+	public void removeScore(Score score) {
 		mongoOps.remove(score);
 	}
 }
