@@ -27,17 +27,43 @@ public class RestService {
         scoreController = new ScoreController();
     }
 
+    /**
+     * reads all scores in the database. catches exceptions if facing an error.
+     * 
+     * @return List w/ all scores
+     */
     @GetMapping("/scores")
-    public List<Score> newScore() {
+    public List<Score> findAllScores() {
 
         try {
             return scoreController.findAll();
         } catch (Exception e) {
-            LOGGER.warn("error reading scores", e);
+            LOGGER.warn("error occured while reading scores", e);
             return new ArrayList<>();
         }
     }
 
+    /**
+     * reads top ten scores in the database. catches exceptions if facing an error.
+     * 
+     * @return
+     */
+    @GetMapping("/topten")
+    public List<Score> findTopTen() {
+
+        try {
+            return scoreController.findTopTen();
+        } catch (Exception e) {
+            LOGGER.warn("error occured while reading top ten scores", e);
+            return new ArrayList<>();
+        }
+    }
+
+    /**
+     * inserts one new score object. catches exceptions if facing an error.
+     * 
+     * @param score
+     */
     @PutMapping("/scores")
     public void insertScore(@RequestBody Score score) {
 
@@ -48,6 +74,11 @@ public class RestService {
         }
     }
 
+    /**
+     * removes a specific score by id. catches exceptions if facing an error.
+     * 
+     * @param id
+     */
     @DeleteMapping("/scores/{id}")
     public void removeScore(@PathVariable String id) {
 
@@ -58,4 +89,5 @@ public class RestService {
             LOGGER.warn("error deleting score " + id, e);
         }
     }
+
 }

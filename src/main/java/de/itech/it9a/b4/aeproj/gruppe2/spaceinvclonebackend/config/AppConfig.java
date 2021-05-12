@@ -9,6 +9,9 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 
+/**
+ * Configuration class for connection to mongo database
+ */
 @Configuration
 public class AppConfig {
 

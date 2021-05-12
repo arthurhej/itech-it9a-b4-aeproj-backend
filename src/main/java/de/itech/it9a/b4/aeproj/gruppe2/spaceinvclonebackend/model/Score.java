@@ -7,12 +7,12 @@ public class Score {
     @Id
     private String id;
     private String name;
-    private long score;
+    private Long points;
 
-    public Score(String name, long score) {
+    public Score(String name, Long points) {
 
         this.name = name;
-        this.score = score;
+        this.points = points;
     }
 
     public String getName() {
@@ -25,14 +25,14 @@ public class Score {
         this.name = name;
     }
 
-    public long getScore() {
+    public Long getPoints() {
 
-        return score;
+        return points;
     }
 
-    public void setScore(long score) {
+    public void setPoints(Long points) {
 
-        this.score = score;
+        this.points = points;
     }
 
     public String getId() {
@@ -48,7 +48,7 @@ public class Score {
     @Override
     public String toString() {
 
-        return "Score [id=" + id + ", name=" + name + ", score=" + score + "]";
+        return "Score [id=" + id + ", name=" + name + ", points=" + points + "]";
     }
 
 }
