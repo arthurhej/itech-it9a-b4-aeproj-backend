@@ -4,43 +4,51 @@ import org.springframework.data.annotation.Id;
 
 public class Score {
 
-	@Id
-	private String id;
-	private String name;
-	private long score;
-	
-	public Score(String name, long score){
-		this.name = name;
-		this.score = score;
-	}
+    @Id
+    private String id;
+    private String name;
+    private Long points;
 
-	public String getName() {
-		return name;
-	}
+    public Score(String name, Long points) {
 
-	public void setName(String name) {
-		this.name = name;
-	}
+        this.name = name;
+        this.points = points;
+    }
 
-	public long getScore() {
-		return score;
-	}
+    public String getName() {
 
-	public void setScore(long score) {
-		this.score = score;
-	}
+        return name;
+    }
 
-	public String getId() {
-		return id;
-	}
+    public void setName(String name) {
 
-	public void setId(String id) {
-		this.id = id;
-	}
+        this.name = name;
+    }
 
-	@Override
-	public String toString() {
-		return "Score [id=" + id + ", name=" + name + ", score=" + score + "]";
-	}
-	
+    public Long getPoints() {
+
+        return points;
+    }
+
+    public void setPoints(Long points) {
+
+        this.points = points;
+    }
+
+    public String getId() {
+
+        return id;
+    }
+
+    public void setId(String id) {
+
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Score [id=" + id + ", name=" + name + ", points=" + points + "]";
+    }
+
 }
