@@ -9,7 +9,6 @@ public class SpaceInvCloneBackendApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(SpaceInvCloneBackendApplication.class, args);
-
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.config.AppConfig;
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.model.Score;
@@ -19,7 +20,17 @@ public class ScoreController {
      * "Toolbox" to execute transactions on the mongo database.
      * Needs a config class to work with a specific database.
      */
-    private final MongoOperations mongoOps = appConf.mongoTemplate();
+    private MongoOperations mongoOps = appConf.mongoTemplate();
+
+    /**
+     * sets the required mongo template
+     * 
+     * @param mt
+     */
+    public void setMongoOps(MongoTemplate mt) {
+
+        this.mongoOps = mt;
+    }
 
     /**
      * requests the insertion of a new score into the database
@@ -61,7 +72,12 @@ public class ScoreController {
 
         List<Score> allScores = findAll();
         allScores.sort(Comparator.comparingLong(Score::getPoints).reversed());
-        return allScores.subList(0, 9);
+
+        if (allScores.size() < 10) {
+            return allScores.subList(0, allScores.size() - 1);
+        } else {
+            return allScores.subList(0, 9);
+        }
     }
 
     /**
@@ -73,4 +89,5 @@ public class ScoreController {
 
         mongoOps.remove(score);
     }
+
 }
