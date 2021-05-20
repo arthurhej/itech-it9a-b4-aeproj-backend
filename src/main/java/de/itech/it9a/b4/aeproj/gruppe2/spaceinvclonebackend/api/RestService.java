@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.controller.ScoreController;
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.model.Score;
 
 @RestController
+@RequestMapping("/api")
 public class RestService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RestService.class);
