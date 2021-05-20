@@ -3,6 +3,8 @@ package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -65,7 +67,7 @@ public class RestService {
      * @param score
      */
     @PutMapping("/scores")
-    public void insertScore(@RequestBody Score score) {
+    public void insertScore(@Valid @RequestBody Score score) {
 
         try {
             scoreController.insertScore(score);

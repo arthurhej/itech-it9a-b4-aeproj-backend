@@ -1,12 +1,22 @@
 package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
+
 import org.springframework.data.annotation.Id;
 
 public class Score {
 
     @Id
     private String id;
+
+    @NotNull
+    @Pattern(regexp = "\\w{5}")
     private String name;
+
+    @NotNull
+    @Positive
     private Long points;
 
     public Score(String name, Long points) {
