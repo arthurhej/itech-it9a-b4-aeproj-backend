@@ -1,13 +1,18 @@
 package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.api;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -100,6 +105,12 @@ public class RestService {
 
             LOGGER.warn("error deleting score " + id, e);
         }
+    }
+
+    @ExceptionHandler({ MethodArgumentNotValidException.class })
+    public void badRequestHandler(HttpServletResponse response) throws IOException {
+
+        response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
 }
