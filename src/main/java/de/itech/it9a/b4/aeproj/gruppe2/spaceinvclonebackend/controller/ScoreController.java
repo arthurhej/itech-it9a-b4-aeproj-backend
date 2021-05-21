@@ -1,5 +1,6 @@
 package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.controller;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -71,13 +72,21 @@ public class ScoreController {
     public List<Score> findTopTen() {
 
         List<Score> allScores = findAll();
-        allScores.sort(Comparator.comparingLong(Score::getPoints).reversed());
+        try {
 
-        if (allScores.size() < 10) {
-            return allScores.subList(0, allScores.size() - 1);
-        } else {
-            return allScores.subList(0, 9);
+            allScores.sort(Comparator.comparingLong(Score::getPoints).reversed());
+            if (allScores.size() < 10) {
+                return allScores.subList(0, allScores.size() - 1);
+            } else {
+                return allScores.subList(0, 9);
+            }
+        } catch (NullPointerException npe) {
+
+            List<Score> exceptionList = new ArrayList<>();
+            exceptionList.add(new Score("Error: invalid value found!", 404L));
+            return exceptionList;
         }
+
     }
 
     /**

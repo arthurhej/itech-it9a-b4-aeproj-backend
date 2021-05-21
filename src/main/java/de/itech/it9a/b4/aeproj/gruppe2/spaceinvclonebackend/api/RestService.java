@@ -40,8 +40,10 @@ public class RestService {
     public List<Score> findAllScores() {
 
         try {
+
             return scoreController.findAll();
         } catch (Exception e) {
+
             LOGGER.warn("error occured while reading scores", e);
             return new ArrayList<>();
         }
@@ -56,8 +58,10 @@ public class RestService {
     public List<Score> findTopTen() {
 
         try {
+
             return scoreController.findTopTen();
         } catch (Exception e) {
+
             LOGGER.warn("error occured while reading top ten scores", e);
             return new ArrayList<>();
         }
@@ -72,8 +76,10 @@ public class RestService {
     public void insertScore(@Valid @RequestBody Score score) {
 
         try {
+
             scoreController.insertScore(score);
         } catch (Exception e) {
+
             LOGGER.warn("error inserting new score: ", e);
         }
     }
@@ -87,9 +93,11 @@ public class RestService {
     public void removeScore(@PathVariable String id) {
 
         try {
+
             Score score = scoreController.findById(id);
             scoreController.removeScore(score);
         } catch (Exception e) {
+
             LOGGER.warn("error deleting score " + id, e);
         }
     }
