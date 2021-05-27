@@ -24,16 +24,6 @@ public class ScoreController {
     private MongoOperations mongoOps = appConf.mongoTemplate();
 
     /**
-     * sets the required mongo template
-     * 
-     * @param mt
-     */
-    public void setMongoOps(MongoTemplate mt) {
-
-        this.mongoOps = mt;
-    }
-
-    /**
      * requests the insertion of a new score into the database
      * 
      * @param score
@@ -97,6 +87,26 @@ public class ScoreController {
     public void removeScore(Score score) {
 
         mongoOps.remove(score);
+    }
+
+    /**
+     * sets the required mongo template
+     * 
+     * @param mt
+     */
+    public void setMongoOps(MongoTemplate mt) {
+
+        this.mongoOps = mt;
+    }
+
+    /**
+     * gets the required mongo template
+     * 
+     * @return MongoOperations
+     */
+    public MongoOperations getMongoOps() {
+
+        return this.mongoOps;
     }
 
 }

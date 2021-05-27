@@ -1,6 +1,6 @@
 package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend;
 
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
@@ -36,17 +36,20 @@ class ScoreControllerTest {
     }
 
     @Test
-    public void testScoreControllerInsert() throws Exception {
+    void testFindTopTen() throws Exception {
 
-        List<Score> scoreList = List.of(new Score("Nullnummer", 0L), new Score("Höchsten Long", Long.MAX_VALUE),
-                new Score("negative Zahl", -1L), new Score("null", null), new Score("Hier ist einfach bisschen länger", 1L),
-                new Score(null, 1L));
+        List<Score> mockReturnList = List.of(new Score("Tes01", 1L), new Score("Tes02", 2L), new Score("Tes03", 3L), new Score("Tes04", 4L),
+                new Score("Tes05", 5L), new Score("Tes06", 6L), new Score("Tes07", 7L), new Score("Tes08", 8L), new Score("Tes09", 9L),
+                new Score("Tes10", 10L), new Score("Tes11", 11L), new Score("Tes12", 12L), new Score("Tes13", 13L), new Score("Tes14", 14L),
+                new Score("Tes15", 15L));
 
-        for (Score score : scoreList) {
-            sc.insertScore(score);
-            verify(mt).insert(Mockito.eq(score));
-        }
+        // MongoOperations mongoOpsMock = Mockito.mock(MongoOperations.class);
 
+        Mockito.when(mt.findAll(Score.class)).thenReturn(mockReturnList);
+        List<Score> sortedScoreList = sc.findTopTen();
+
+        assertEquals(15L, sortedScoreList.get(0).getPoints());
+        assertEquals("Tes15", sortedScoreList.get(0).getName());
     }
 
 }
