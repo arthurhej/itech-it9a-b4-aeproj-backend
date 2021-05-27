@@ -1,7 +1,6 @@
 package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.controller;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -9,6 +8,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.config.AppConfig;
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.model.Score;
+import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.utilities.SortUtils;
 
 /**
  * Communication between Database and Restful Service
@@ -74,7 +74,7 @@ public class ScoreController {
         List<Score> allScores = findAll();
         try {
 
-            allScores.sort(Comparator.comparingLong(Score::getPoints).reversed());
+            allScores = SortUtils.myShortSort(allScores);
             if (allScores.size() < 10) {
                 return allScores.subList(0, allScores.size() - 1);
             } else {
