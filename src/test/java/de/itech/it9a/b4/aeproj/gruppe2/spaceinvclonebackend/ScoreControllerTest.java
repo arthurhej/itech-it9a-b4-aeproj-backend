@@ -1,7 +1,10 @@
 package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,32 +27,87 @@ class ScoreControllerTest {
 
     @Mock
     private MongoTemplate mt;
-
     private ScoreController sc;
 
     @BeforeEach
     public void setUp() throws Exception {
-
         MockitoAnnotations.openMocks(this);
         sc = new ScoreController();
         sc.setMongoOps(mt);
     }
 
     @Test
-    void testFindTopTen() throws Exception {
+    public void testInsertScoreCallsDbInsert(){
+        Score score = new Score("Otto", 1L);
 
-        List<Score> mockReturnList = List.of(new Score("Tes01", 1L), new Score("Tes02", 2L), new Score("Tes03", 3L), new Score("Tes04", 4L),
-                new Score("Tes05", 5L), new Score("Tes06", 6L), new Score("Tes07", 7L), new Score("Tes08", 8L), new Score("Tes09", 9L),
-                new Score("Tes10", 10L), new Score("Tes11", 11L), new Score("Tes12", 12L), new Score("Tes13", 13L), new Score("Tes14", 14L),
-                new Score("Tes15", 15L));
+        sc.insertScore(score);
+        verify(mt).insert(Mockito.eq(score));
+    }
 
-        // MongoOperations mongoOpsMock = Mockito.mock(MongoOperations.class);
+    @Test
+    public void testFindByIdIsCalledInDb(){
+        Score score = new Score("Otto", 1L);
+        score.setId("123456");
+
+        sc.findById(score.getId());
+        verify(mt).findById(score.getId(), Score.class);
+    }
+
+    @Test
+    public void testFindAllIsCalledInDb(){
+        sc.findAll();
+        verify(mt).findAll(Score.class);
+    }
+
+    @Test
+    public void testRemoveScoreCallsDbRemove(){
+        Score score = new Score("Otto", 1L);
+
+        sc.removeScore(score);
+        verify(mt).remove(Mockito.eq(score));
+    }
+
+    @Test
+    void testFindTopTenWithListSizeBigger10(){
+        List<Score> mockReturnList = Arrays.asList(new Score("Test1", 1L), new Score("Test2", 2L), new Score("Test3", 3L), new Score("Test4", 4L),
+                new Score("Test5", 5L), new Score("Test6", 6L), new Score("Test7", 7L), new Score("Test8", 8L), new Score("Test9", 9L),
+                new Score("Test10", 10L), new Score("Test11", 11L), new Score("Test12", 12L), new Score("Test13", 13L), new Score("Test14", 14L),
+                new Score("Test15", 15L));
 
         Mockito.when(mt.findAll(Score.class)).thenReturn(mockReturnList);
         List<Score> sortedScoreList = sc.findTopTen();
 
-        assertEquals(15L, sortedScoreList.get(0).getPoints());
-        assertEquals("Tes15", sortedScoreList.get(0).getName());
+        long scoreValue = 15L;
+        assertEquals(10, sortedScoreList.size());
+        for(Score score : sortedScoreList){
+            assertEquals("Test" + scoreValue, score.getName());
+            assertEquals(scoreValue, score.getPoints());
+            scoreValue--;
+        }
     }
 
+    @Test
+    void testFindTopTenWithListSizeSmallerTen(){
+        List<Score> mockReturnList = Arrays.asList(new Score("Test1", 1L), new Score("Test2", 2L), new Score("Test3", 3L), new Score("Test4", 4L),
+                new Score("Test5", 5L));
+
+        Mockito.when(mt.findAll(Score.class)).thenReturn(mockReturnList);
+        List<Score> sortedScoreList = sc.findTopTen();
+
+        long scoreValue = 5L;
+        assertEquals(5, sortedScoreList.size());
+        for(Score score : sortedScoreList){
+            assertEquals("Test" + scoreValue, score.getName());
+            assertEquals(scoreValue, score.getPoints());
+            scoreValue--;
+        }
+    }
+
+    @Test
+    void testFindTopTenWithListSizeZero(){
+        Mockito.when(mt.findAll(Score.class)).thenReturn(new ArrayList<>());
+        List<Score> sortedScoreList = sc.findTopTen();
+
+        assertEquals(0, sortedScoreList.size());
+    }
 }

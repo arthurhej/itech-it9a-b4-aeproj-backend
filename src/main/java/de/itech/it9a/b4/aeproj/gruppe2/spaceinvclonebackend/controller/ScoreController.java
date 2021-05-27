@@ -55,6 +55,16 @@ public class ScoreController {
     }
 
     /**
+     * removes specific score
+     *
+     * @param score
+     */
+    public void removeScore(Score score) {
+
+        mongoOps.remove(score);
+    }
+
+    /**
      * gets all scores and sorts them desc by points
      * 
      * @return top ten scores by points
@@ -65,10 +75,10 @@ public class ScoreController {
         try {
 
             allScores = SortUtils.myShortSort(allScores);
-            if (allScores.size() < 10) {
-                return allScores.subList(0, allScores.size() - 1);
+            if (allScores.size() < 11) {
+                return allScores.subList(0, allScores.size());
             } else {
-                return allScores.subList(0, 9);
+                return allScores.subList(0, 10);
             }
         } catch (NullPointerException npe) {
 
@@ -77,16 +87,6 @@ public class ScoreController {
             return exceptionList;
         }
 
-    }
-
-    /**
-     * removes specific score
-     * 
-     * @param score
-     */
-    public void removeScore(Score score) {
-
-        mongoOps.remove(score);
     }
 
     /**
