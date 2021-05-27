@@ -107,6 +107,12 @@ public class RestService {
         }
     }
 
+    /**
+     * handles exception if pattern restrictions for score weren't met
+     * 
+     * @param response
+     * @throws IOException
+     */
     @ExceptionHandler({ MethodArgumentNotValidException.class })
     public void badRequestHandler(HttpServletResponse response) throws IOException {
 
