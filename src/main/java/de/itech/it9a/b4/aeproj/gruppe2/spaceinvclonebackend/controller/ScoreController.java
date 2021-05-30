@@ -3,16 +3,19 @@ package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.config.AppConfig;
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.model.Score;
 import de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.utilities.SortUtils;
+import org.springframework.stereotype.Service;
 
 /**
  * Communication between Database and Restful Service
  */
+@TestConfiguration
 public class ScoreController {
 
     private final AppConfig appConf = new AppConfig();

@@ -1,4 +1,4 @@
-package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend;
+package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
