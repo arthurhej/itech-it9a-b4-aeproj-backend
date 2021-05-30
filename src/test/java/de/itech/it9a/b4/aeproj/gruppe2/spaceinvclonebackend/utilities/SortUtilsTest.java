@@ -1,4 +1,4 @@
-package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend;
+package de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.utilities;
 
 import static de.itech.it9a.b4.aeproj.gruppe2.spaceinvclonebackend.utilities.SortUtils.myShortSort;
 import static org.junit.jupiter.api.Assertions.assertEquals;
